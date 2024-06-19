@@ -471,3 +471,8 @@ export const backgroundBoxStyle = (theme: Theme) => css(({
   padding: "20px",
   ...(flexGapReplacementStyle(25, false)),
 }));
+
+export const checkboxStyle = (theme: Theme) => css({
+  color: theme.text,
+  "&.Mui-disabled": { color: theme.disabled },
+});
