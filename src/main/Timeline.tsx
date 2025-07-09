@@ -18,7 +18,7 @@ import {
   moveCut,
 } from "../redux/videoSlice";
 
-import { LuMenu, LuLoader } from "react-icons/lu";
+import { LuMenu } from "react-icons/lu";
 
 import useResizeObserver from "use-resize-observer";
 
@@ -34,7 +34,7 @@ import { ThemedTooltip } from "./Tooltip";
 import ScrollContainer from "react-indiana-drag-scroll";
 import CuttingActionsContextMenu from "./CuttingActionsContextMenu";
 import { useHotkeys } from "react-hotkeys-hook";
-import { spinningStyle } from "../cssStyles";
+import { Spinner } from "@opencast/appkit";
 
 /**
  * A container for visualizing the cutting of the video, as well as for controlling
@@ -87,6 +87,7 @@ const Timeline: React.FC<{
     zoomCenter.current = (scrubberVisible ? scrubberPosition : centerPosition) / width;
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(updateScroll, [currentlyAt, timelineZoom, width]);
 
   useEffect(() => {
@@ -250,25 +251,25 @@ export const Scrubber: React.FC<{
     KEYMAP.timeline.left.key,
     () => dispatch(setCurrentlyAt(Math.max(currentlyAt - keyboardJumpDelta, 0))),
     {},
-    [currentlyAt, keyboardJumpDelta]
+    [currentlyAt, keyboardJumpDelta],
   );
   useHotkeys(
     KEYMAP.timeline.right.key,
     () => dispatch(setCurrentlyAt(Math.min(currentlyAt + keyboardJumpDelta, duration))),
     {},
-    [currentlyAt, keyboardJumpDelta, duration]
+    [currentlyAt, keyboardJumpDelta, duration],
   );
   useHotkeys(
     KEYMAP.timeline.increase.key,
     () => setKeyboardJumpDelta(keyboardJumpDelta => Math.min(keyboardJumpDelta * 10, 1000000)),
     {},
-    [keyboardJumpDelta]
+    [keyboardJumpDelta],
   );
   useHotkeys(
     KEYMAP.timeline.decrease.key,
     () => setKeyboardJumpDelta(keyboardJumpDelta => Math.max(keyboardJumpDelta / 10, 1)),
     {},
-    [keyboardJumpDelta]
+    [keyboardJumpDelta],
   );
 
   const scrubberStyle = css({
@@ -595,6 +596,7 @@ export const Waveforms: React.FC<{ timelineHeight: number; }> = ({ timelineHeigh
   const waveformStyle = css({
     background: `${theme.waveform_bg}`,
     borderRadius: "5px",
+    imageRendering: "pixelated",
   });
 
   // When the URLs to the videos are fetched, generate waveforms
@@ -664,7 +666,7 @@ export const Waveforms: React.FC<{ timelineHeight: number; }> = ({ timelineHeigh
     } else {
       return (
         <>
-          <LuLoader css={[spinningStyle, { fontSize: 40 }]} />
+          <Spinner size={40} />
           <div>{t("timeline.generateWaveform-text")}</div>
         </>
       );

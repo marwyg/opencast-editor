@@ -1,9 +1,10 @@
-name: Deploy Crowdin keys
+name: Crowdin » Upload keys
 
 on:
   push:
     branches:
-      - main
+      - develop
+      - r/*
 
 concurrency:
   group: crowdin

@@ -224,13 +224,13 @@
     },
     "trackSelection": {
         "title": "Spur(en) für die Verarbeitung auswählen",
-        "trackInactive": "inaktiv",
-        "deleteTrackText": "Spur löschen",
-        "restoreTrackText": "Spur wiederherstellen",
-        "cannotDeleteTrackText": "Spur kann nicht gelöscht werden",
-        "deleteTrackTooltip": "Diese Spur nicht verarbeiten und veröffentlichen.",
-        "restoreTrackTooltip": "Diese Spur verarbeiten und veröffentlichen.",
-        "cannotDeleteTrackTooltip": "Diese Spur kann nicht entfernt werden."
+        "trackInactive": "inactive",
+        "deleteTrackText": "Delete Track",
+        "restoreTrackText": "Restore Track",
+        "cannotDeleteTrackText": "Cannot Delete Track",
+        "deleteTrackTooltip": "Do not encode and publish this track.",
+        "restoreTrackTooltip": "Encode and publish this track.",
+        "cannotDeleteTrackTooltip": "Cannot remove this track from publication."
     },
     "subtitles": {
         "selectSubtitleButton-tooltip": "Untertitel für {{title}} bearbeiten",
@@ -243,6 +243,10 @@
         "createSubtitleDropdown-label": "Wähle eine Sprache",
         "backButton": "Zurück",
         "backButton-tooltip": "Zurück zur Untertitelauswahl",
+        "deleteButton-title": "Löschen",
+        "deleteButton-tooltip": "Delete subtitle",
+        "deleteButton-warning-header": "Achtung!",
+        "deleteButton-warning": "You will remove the current subtitle. This cannot be undone. Are you sure?",
         "downloadButton-title": "Herunterladen",
         "downloadButton-tooltip": "Untertitel als vtt-Datei herunterladen",
         "uploadButton-title": "Hochladen",

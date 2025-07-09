@@ -224,13 +224,13 @@
     },
     "trackSelection": {
         "title": "Επιλογή κομματιού(ών) για επεξεργασία",
-        "trackInactive": "ανενεργό",
-        "deleteTrackText": "Διαγραφή Κομματιού",
-        "restoreTrackText": "Επαναφορά Κομματιού",
-        "cannotDeleteTrackText": "Αδυναμία Διαγραφής Κομματιού",
-        "deleteTrackTooltip": "Να μην κωδικοποιηθεί και δημοσιευτεί αυτό το κομμάτι.",
-        "restoreTrackTooltip": "Κωδικοποίηση και δημοσίευση αυτού του κομματιού.",
-        "cannotDeleteTrackTooltip": "Δεν είναι δυνατή η αφαίρεση αυτού του κομματιού από τη δημοσίευση."
+        "trackInactive": "inactive",
+        "deleteTrackText": "Delete Track",
+        "restoreTrackText": "Restore Track",
+        "cannotDeleteTrackText": "Cannot Delete Track",
+        "deleteTrackTooltip": "Do not encode and publish this track.",
+        "restoreTrackTooltip": "Encode and publish this track.",
+        "cannotDeleteTrackTooltip": "Cannot remove this track from publication."
     },
     "subtitles": {
         "selectSubtitleButton-tooltip": "Επεξεργασία υποτίτλων για {{title}}",
@@ -243,6 +243,10 @@
         "createSubtitleDropdown-label": "Επιλέξτε μια γλώσσα",
         "backButton": "Επιστροφή",
         "backButton-tooltip": "Επιστροφή στην επιλογή υποτίτλων",
+        "deleteButton-title": "Διαγραφή",
+        "deleteButton-tooltip": "Delete subtitle",
+        "deleteButton-warning-header": "Προσοχή!",
+        "deleteButton-warning": "You will remove the current subtitle. This cannot be undone. Are you sure?",
         "downloadButton-title": "Λήψη",
         "downloadButton-tooltip": "Λήψη υποτίτλων ως αρχείο vtt",
         "uploadButton-title": "Ανέβασμα",

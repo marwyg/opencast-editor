@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { IconType } from "react-icons";
-import { LuCamera, LuCopy, LuXCircle, LuUpload } from "react-icons/lu";
+import { LuCamera, LuCopy, LuCircleX, LuUpload } from "react-icons/lu";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../redux/store";
@@ -38,6 +38,7 @@ import {
 import { ThemedTooltip } from "./Tooltip";
 import VideoPlayers, { VideoPlayerForwardRef } from "./VideoPlayers";
 import VideoControls from "./VideoControls";
+import { ProtoButton } from "@opencast/appkit";
 
 
 /**
@@ -418,7 +419,7 @@ const ThumbnailButtons: React.FC<{
         text={t("thumbnail.buttonDiscard")}
         tooltipText={t("thumbnail.buttonDiscard-tooltip")}
         ariaLabel={t("thumbnail.buttonDiscard-tooltip-aria")}
-        Icon={LuXCircle}
+        Icon={LuCircleX}
         active={(track.thumbnailUri && track.thumbnailUri.startsWith("data") ? true : false)}
       />
     </div>
@@ -434,7 +435,7 @@ const ThumbnailButton: React.FC<{
   active: boolean,
 }> = ({ handler, text, tooltipText, ariaLabel, Icon, active }) => {
   const theme = useTheme();
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = React.useRef<HTMLButtonElement>(null);
 
   const clickHandler = () => {
     if (active) { handler(); }
@@ -448,16 +449,16 @@ const ThumbnailButton: React.FC<{
 
   return (
     <ThemedTooltip title={tooltipText}>
-      <div
-        css={thumbnailButtonStyle(active, theme)}
-        ref={ref}
-        role="button" tabIndex={0} aria-label={ariaLabel}
+      <ProtoButton
+        {...{ ref }}
+        aria-label={ariaLabel}
         onClick={clickHandler}
         onKeyDown={keyHandler}
+        css={thumbnailButtonStyle(active, theme)}
       >
         <Icon />
         {text}
-      </div>
+      </ProtoButton>
     </ThemedTooltip>
   );
 };
@@ -501,20 +502,16 @@ const AffectAllRow: React.FC<{
   return (
     <div css={rowStyle}>
       <ThemedTooltip title={t("thumbnail.buttonGenerateAll-tooltip")}>
-        <div css={[basicButtonStyle(theme), buttonStyle]}
-          role="button" tabIndex={0} aria-label={t("thumbnail.buttonGenerateAll-tooltip-aria")}
+        <ProtoButton
+          aria-label={t("thumbnail.buttonGenerateAll-tooltip-aria")}
           onClick={() => {
             generateAll();
           }}
-          onKeyDown={(event: React.KeyboardEvent) => {
-            if (event.key === " " || event.key === "Enter") {
-              generateAll();
-            }
-          }}
+          css={[basicButtonStyle(theme), buttonStyle]}
         >
           <LuCamera />
           {t("thumbnail.buttonGenerateAll")}
-        </div>
+        </ProtoButton>
       </ThemedTooltip>
     </div>
   );
@@ -614,7 +611,7 @@ const ThumbnailButtonsSimple: React.FC<{
         text={t("thumbnail.buttonDiscard")}
         tooltipText={t("thumbnail.buttonDiscard-tooltip")}
         ariaLabel={t("thumbnail.buttonDiscard-tooltip-aria")}
-        Icon={LuXCircle}
+        Icon={LuCircleX}
         active={(track.thumbnailUri && track.thumbnailUri.startsWith("data") ? true : false)}
       />
     </div>

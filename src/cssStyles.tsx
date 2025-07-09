@@ -1,11 +1,14 @@
 /**
  * This file contains general css stylings
  */
-import { css, Global, keyframes } from "@emotion/react";
+import { css, Global } from "@emotion/react";
 import React from "react";
 import emotionNormalize from "emotion-normalize";
 import { createTheme } from "@mui/material/styles";
 import { Theme, useTheme } from "./themes";
+import {
+  DEFAULT_CONFIG as APPKIT_CONFIG,
+} from "@opencast/appkit";
 import { StylesConfig } from "react-select";
 
 /**
@@ -31,19 +34,22 @@ export const globalStyle = (theme: Theme) => css({
     // Makes the body span to the bottom of the page
     minHeight: "100vh",
   },
+  // Some elements not inheriting fonts is a really confusing browser default.
+  "input, button, textarea, select": {
+    font: "inherit",
+  },
 });
 
 
 // When to switch behaviour based on screen width
-export const BREAKPOINT_SMALL = 450;
-export const BREAKPOINT_MEDIUM = 650;
+/** Breakpoint values */
+export const BREAKPOINTS = APPKIT_CONFIG.breakpoints;
 
 /**
  * CSS for buttons
  */
 export const basicButtonStyle = (theme: Theme) => css({
   borderRadius: "5px",
-  cursor: "pointer",
   "&:hover": {
     backgroundColor: `${theme.button_color}`,
     color: `${theme.inverted_text}`,
@@ -159,21 +165,6 @@ export const ariaLive = css({
   width: "1px",
   overflow: "hidden",
 });
-
-/**
- * CSS for displaying of errors
- */
-export const errorBoxStyle = (errorStatus: boolean, theme: Theme) => {
-  return (
-    css({
-      ...(!errorStatus) && { display: "none" },
-      borderColor: `${theme.error}`,
-      borderStyle: "dashed",
-      fontWeight: "bold",
-      padding: "10px",
-    })
-  );
-};
 
 type MyOptionType = {
   label: string;
@@ -399,13 +390,6 @@ export const subtitleSelectStyle = (theme: Theme) => createTheme({
   },
 });
 
-export const spinningStyle = css({
-  animation: `2s linear infinite none ${keyframes({
-    "0%": { transform: "rotate(0)" },
-    "100%": { transform: "rotate(360deg)" },
-  })}`,
-});
-
 export const customIconStyle = css(({
   maxWidth: "16px",
   height: "auto",
@@ -433,3 +417,14 @@ export const backgroundBoxStyle = (theme: Theme) => css(({
   padding: "20px",
   gap: "25px",
 }));
+
+export const checkboxStyle = (theme: Theme) => css({
+  color: theme.text,
+  "&.Mui-disabled": { color: theme.disabled },
+});
+
+export const undisplay = (maxWidth: number) => css({
+  [`@media (max-width: ${maxWidth}px)`]: {
+    display: "none",
+  },
+});

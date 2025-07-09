@@ -224,13 +224,13 @@
     },
     "trackSelection": {
         "title": "Select track(s) for processing",
-        "trackInactive": "inactif",
-        "deleteTrackText": "Supprimer la piste",
-        "restoreTrackText": "Restaurer la piste",
-        "cannotDeleteTrackText": "Impossible de supprimer la piste",
-        "deleteTrackTooltip": "Ne pas encoder et publier cette piste.",
-        "restoreTrackTooltip": "Encoder et publier cette piste.",
-        "cannotDeleteTrackTooltip": "Impossible de supprimer cette piste de la publication."
+        "trackInactive": "inactive",
+        "deleteTrackText": "Delete Track",
+        "restoreTrackText": "Restore Track",
+        "cannotDeleteTrackText": "Cannot Delete Track",
+        "deleteTrackTooltip": "Do not encode and publish this track.",
+        "restoreTrackTooltip": "Encode and publish this track.",
+        "cannotDeleteTrackTooltip": "Cannot remove this track from publication."
     },
     "subtitles": {
         "selectSubtitleButton-tooltip": "Edit subtitles for {{title}}",
@@ -243,6 +243,10 @@
         "createSubtitleDropdown-label": "Pick a language",
         "backButton": "Back",
         "backButton-tooltip": "Return to subtitle selection",
+        "deleteButton-title": "Supprimer",
+        "deleteButton-tooltip": "Delete subtitle",
+        "deleteButton-warning-header": "Caution!",
+        "deleteButton-warning": "You will remove the current subtitle. This cannot be undone. Are you sure?",
         "downloadButton-title": "Download",
         "downloadButton-tooltip": "Download subtitle as vtt file",
         "uploadButton-title": "Upload",

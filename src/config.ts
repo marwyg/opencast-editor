@@ -7,7 +7,7 @@
  *
  * Also does some global hotkey configuration
  */
-import parseToml from "@iarna/toml/parse-string";
+import { parse } from "smol-toml";
 import deepmerge from "deepmerge";
 import { Flavor } from "./types";
 
@@ -55,6 +55,8 @@ interface iSettings {
   },
   trackSelection: {
     show: boolean,
+    atLeastOneVideo: boolean,
+    atMostTwoVideos: boolean,
   },
   thumbnail: {
     show: boolean,
@@ -93,6 +95,8 @@ const defaultSettings: iSettings = {
   },
   trackSelection: {
     show: true,
+    atLeastOneVideo: true,
+    atMostTwoVideos: true,
   },
   thumbnail: {
     show: false,
@@ -175,7 +179,7 @@ export const init = async () => {
 
   // Prevent malicious callback urls
   settings.callbackUrl = settings.allowedCallbackPrefixes.some(
-    p => settings.callbackUrl?.startsWith(p)
+    p => settings.callbackUrl?.startsWith(p),
   ) ? settings.callbackUrl : undefined;
 };
 
@@ -211,7 +215,7 @@ const loadContextSettings = async () => {
     return null;
   } else if (!response.ok) {
     console.error(
-      `Fetching "${settingsPath}" failed: ${response.status} ${response.statusText}`
+      `Fetching "${settingsPath}" failed: ${response.status} ${response.statusText}`,
     );
     return null;
   }
@@ -222,7 +226,7 @@ const loadContextSettings = async () => {
   }
 
   try {
-    return parseToml(await response.text());
+    return parse(await response.text());
   } catch (e) {
     console.error(`Could not parse "${settingsPath}" as TOML: `, e);
     throw new SyntaxError(`Could not parse "${settingsPath}" as TOML: ${e}`);
@@ -257,7 +261,7 @@ const validate = (obj: Record<string, any> | null, allowParse: boolean, src: str
     validation: (arg0: any, arg1: boolean, arg2: string) => any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: Record<string, any> | null,
-    path: string
+    path: string,
   ) => {
     try {
       const newValue = validation(value, allowParse, src);
@@ -265,7 +269,7 @@ const validate = (obj: Record<string, any> | null, allowParse: boolean, src: str
     } catch (e) {
       console.warn(
         `Validation of setting "${path}" (${sourceDescription}) with value "${value}" failed: `
-        + `${e}. Ignoring.`
+        + `${e}. Ignoring.`,
       );
       return null;
     }
@@ -291,7 +295,7 @@ const validate = (obj: Record<string, any> | null, allowParse: boolean, src: str
         }
       } else {
         console.warn(
-          `"${newPath}" (${sourceDescription}) is not a valid settings key. Ignoring.`
+          `"${newPath}" (${sourceDescription}) is not a valid settings key. Ignoring.`,
         );
       }
     }
@@ -334,6 +338,7 @@ const types = {
     if (!Array.isArray(v)) {
       throw new Error("is not an array, but should be");
     }
+    // eslint-disable-next-line @typescript-eslint/no-for-in-array
     for (const entry in v) {
       if (typeof entry !== "string") {
         throw new Error("is not a string, but should be");
@@ -403,6 +408,8 @@ const SCHEMA = {
   },
   trackSelection: {
     show: types.boolean,
+    atLeastOneVideo: types.boolean,
+    atMostTwoVideos: types.boolean,
   },
   subtitles: {
     show: types.boolean,
