@@ -6,7 +6,6 @@ import ReactPlayer from "react-player";
 
 import { Track } from "../types";
 import {
-  selectVideoCount,
   selectCustomizedTrackSelection,
   selectVideos,
   selectWaveformImages,
@@ -28,7 +27,6 @@ import { outOfBounds } from "../util/utilityFunctions";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import PlaceholderWaveform from "../img/placeholder-waveform.png";
 import { settings } from "../config";
-import { LuInfo } from "react-icons/lu";
 
 /**
  * Creates the track selection.
@@ -37,8 +35,6 @@ const TrackSelection: React.FC = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const dispatch = useAppDispatch();
-
-  const videoCount = useAppSelector(selectVideoCount);
 
   // Generate list of tracks
   const tracks = useAppSelector(selectVideos);
@@ -175,28 +171,25 @@ const TrackSelection: React.FC = () => {
   return (
     <div css={styles.trackSelection}>
       <Header />
-      {videoCount > 1 ?
-        <>
-          <section css={styles.leftAlignedSection}>
-            <TrackSelectionEnabler
-              customizable={customizedTrackSelection}
-              onChange={onChange}
-            />
-          </section>
-          <section css={[styles.selectionSection, styles.leftAlignedSection]}>
-            <SelectionAlert tracks={tracks} customizable={customizedTrackSelection} />
-          </section>
-          <section css={[styles.selectionSection, styles.trackSection]}>
-            <header><h3>{t("trackSelection.videoTracksHeader")}</h3></header>
-            <div css={styles.trackArea}>{ videoTrackItems }</div>
-          </section>
-          <section css={[styles.selectionSection, styles.trackSection]}>
-            <header><h3>{t("trackSelection.audioTracksHeader")}</h3></header>
-            <div css={styles.trackArea}>{ audioTrackItems }</div>
-          </section>
-        </>
-        : <InfoBox />
-      }
+      <>
+        <section css={styles.leftAlignedSection}>
+          <TrackSelectionEnabler
+            customizable={customizedTrackSelection}
+            onChange={onChange}
+          />
+        </section>
+        <section css={[styles.selectionSection, styles.leftAlignedSection]}>
+          <SelectionAlert tracks={tracks} customizable={customizedTrackSelection} />
+        </section>
+        <section css={[styles.selectionSection, styles.trackSection]}>
+          <header><h3>{t("trackSelection.videoTracksHeader")}</h3></header>
+          <div css={styles.trackArea}>{ videoTrackItems }</div>
+        </section>
+        <section css={[styles.selectionSection, styles.trackSection]}>
+          <header><h3>{t("trackSelection.audioTracksHeader")}</h3></header>
+          <div css={styles.trackArea}>{ audioTrackItems }</div>
+        </section>
+      </>
     </div>
   );
 };
@@ -209,19 +202,6 @@ const Header: React.FC = () => {
   return (
     <div css={[titleStyle(theme), titleStyleBold(theme)]}>
       {description}
-    </div>
-  );
-};
-
-const InfoBox: React.FC = () => {
-
-  const { t } = useTranslation();
-  const theme = useTheme();
-
-  return (
-    <div css={backgroundBoxStyle(theme)}>
-      <LuInfo />
-      <span css={{ marginLeft: "10px" }}>{t("trackSelection.noSelectionPossible")}</span>
     </div>
   );
 };
