@@ -152,7 +152,7 @@ const Timeline: React.FC<{
       hideScrollbars={false}            // ScrollContainer hides scrollbars per default
       onEndScroll={updateScroll}
     >
-      <CuttingActionsContextMenu>
+      <CuttingActionsContextMenu isChapters={isChapters} isInteractiveElements={isInteractiveElements}>
         <div ref={ref} css={timelineStyle} onMouseDown={e => setCurrentlyAtToClick(e)}>
           <Scrubber
             ref={scrubberRef}
