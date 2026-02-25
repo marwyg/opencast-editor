@@ -7,23 +7,23 @@ on:
       - r/*
 
 concurrency:
-  group: crowdin-${{ github.ref }}
+  group: crowdin
   cancel-in-progress: true
 
 jobs:
-  upload-translation-keys:
+  deploy-translation-keys:
     if: github.repository_owner == 'opencast'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v4
 
-    - name: Prepare crowdin client
+    - name: prepare crowdin client
       run: |
-        wget --quiet https://artifacts.crowdin.com/repo/deb/crowdin3.deb
-        sudo dpkg -i crowdin3.deb
+        wget --quiet https://artifacts.crowdin.com/repo/deb/crowdin3.deb -O crowdin.deb
+        sudo dpkg -i crowdin.deb
 
-    - name: Upload translation source
+    - name: upload translation source
       env:
         CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
       run: |
-        crowdin upload sources --config .crowdin.yaml -b "${GITHUB_REF##*/}"
+        crowdin upload sources --config .crowdin.yaml -b main

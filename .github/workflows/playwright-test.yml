@@ -1,4 +1,4 @@
-name: Build » Playwright UI-Test
+name: Playwright UI-Test
 
 on:
   push:
@@ -15,10 +15,10 @@ jobs:
 
     steps:
     - name: Check out source code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v4
 
     - name: Install Node Dependency
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v4
       with:
         node-version: 20
 
